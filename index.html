@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch a Sketch</title>
+  
+</head>
+<body>
+    <script>
+    const body = document.querySelector("body");
+    const heading = document.createElement("h1");
+    heading.textContent = "Etch-a-Sketch";
+    body.appendChild(heading);
+    var mousedown=false;
+    const drawarea= document.createElement("div");
+    document.addEventListener("mousedown",()=>{
+      mousedown=true;
+    })
+    
+    document.addEventListener("mouseup",()=>{
+      mousedown=false;
+    })
+    drawarea.setAttribute("style","display:flex;flex-wrap:wrap;width:500px;height:500px;background-color:grey;border:2px solid red;");
+    body.appendChild(drawarea);
+    n=prompt("Number?");
+    const boxsize= 500/n;
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+          const box= document.createElement("div");
+          box.setAttribute("style",`border:1px solid black; margin: 0;height:${boxsize}px;width:${boxsize}px;background-color:white;box-sizing:border-box;`);
+          box.classList.add("gridBox");
+          box.addEventListener("mouseover",()=>{
+            if(mousedown)
+            box.style.backgroundColor="pink";
+          });
+          box.addEventListener("mousedown",()=>{
+            box.style.backgroundColor="pink";
+          })
+          drawarea.appendChild(box);
+        }
+    }
+    const clear= document.createElement("button");
+    clear.textContent="Clear all";
+    clear.addEventListener("click",()=>{
+      const list= document.querySelectorAll(".gridBox");
+      list.forEach(box => {
+          box.style.backgroundColor="white";
+      });
+    })
+    body.appendChild(clear);
+  </script>
+</body>
+</html>
